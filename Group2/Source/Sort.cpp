@@ -38,13 +38,64 @@ void bubbleSort(int a[], int n) {
     }
 }
 
-//==============================================
-//SHAKERSORT
-//==============================================
+void shakerSort(int a[], int n)
+{
+    int low = 0, high = n - 1;
+    bool swapped = true;
 
-//==============================================
-//SHELLSORT
-//==============================================
+    while (swapped == true)
+    {
+        swapped = false;
+
+        for (int i = low; i < high; i += 1)
+        {
+            if (a[i] > a[i + 1])
+            {
+                int temp = a[i];
+                a[i] = a[i + 1];
+                a[i + 1] = temp;
+                swapped = true;
+            }
+        }
+
+        if (swapped == false)
+            break;
+
+        swapped = false;
+        high -= 1;
+
+        for (int i = high; i > low; i -= 1)
+        {
+            if (a[i] < a[i - 1])
+            {
+                int temp = a[i];
+                a[i] = a[i - 1];
+                a[i - 1] = temp;
+                swapped = true;
+            }
+        }
+
+        low += 1;
+    }
+}
+
+void shellSort(int a[], int n)
+{
+    for (int gap = n / 2; gap > 0; gap /= 2)
+    {
+        for (int i = gap; i < n; i += 1)
+        {
+            int temp = a[i];
+            int j = i;
+            while (j >= gap && a[j - gap] > temp)
+            {
+                a[j] = a[j - gap];
+                j -= gap;
+            }
+            a[j] = temp;
+        }
+    }
+}
 
 void heapify(int a[], int n, int i) {
     int largest = i;     
@@ -193,9 +244,85 @@ void radixSort(int a[], int n) {
         count(a, n, base);
 }
 
-//==========================================
-//Flash sort
-//==========================================
+void flashSort(int a[], int n)
+{
+    int minValue = a[0];
+    int maxIndex = 0;
+    int lengthToConsider = int(0.45 * n);
+    int *countArray = new int[lengthToConsider];
+
+    for (int i = 0; i < lengthToConsider; i++)
+        countArray[i] = 0;
+
+    for (int i = 1; i < n; i++)
+    {
+        if (a[i] < minValue)
+            minValue = a[i];
+        if (a[i] > a[maxIndex])
+            maxIndex = i;
+    }
+
+    if (a[maxIndex] == minValue)
+    {
+        delete[] countArray;
+        return;
+    }
+
+    double coefficient = (double)(lengthToConsider - 1) / (a[maxIndex] - minValue);
+
+    for (int i = 0; i < n; i++)
+    {
+        int countIndex = int(coefficient * (a[i] - minValue));
+        countArray[countIndex] += 1;
+    }
+
+    for (int i = 1; i < lengthToConsider; i++)
+        countArray[i] += countArray[i - 1];
+
+    int temp = a[maxIndex];
+    a[maxIndex] = a[0];
+    a[0] = temp;
+
+    int elementsMoved = 0;
+    int currentIndex = 0;
+    int countIndex = lengthToConsider - 1;
+    int tempIndex = 0;
+    int flash;
+
+    while (elementsMoved < n - 1)
+    {
+        while (currentIndex > countArray[countIndex] - 1)
+        {
+            currentIndex += 1;
+            countIndex = int(coefficient * (a[currentIndex] - minValue));
+        }
+        flash = a[currentIndex];
+        if (countIndex < 0)
+            break;
+        while (currentIndex != countArray[countIndex])
+        {
+            countIndex = int(coefficient * (flash - minValue));
+            int hold = a[tempIndex = --countArray[countIndex]];
+            a[tempIndex] = flash;
+            flash = hold;
+            elementsMoved += 1;
+        }
+    }
+
+    delete[] countArray;
+
+    for (int i = 1; i < n; i++)
+    {
+        int key = a[i];
+        int j = i - 1;
+        while (j >= 0 && a[j] > key)
+        {
+            a[j + 1] = a[j];
+            j -= 1;
+        }
+        a[j + 1] = key;
+    }
+}
 
 //==========================================
 //count_compare theo thu tu  Selection Sort, Insertion Sort, Bubble Sort, Shaker Sort, Shell Sort, Heap
