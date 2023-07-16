@@ -101,19 +101,19 @@ void heapifyWithCount_compare(int a[], int n, int i, int & count_compare) {
         int temp = a[i];
         a[i] = a[largest];
         a[largest] = temp;
-        heapify(a, n, largest, count_compare);
+        heapifyWithCount_compare(a, n, largest, count_compare);
     }
 }
 
 void heapSortWithCount_compare(int a[], int n, int &count_compare) {
 
     for (int i = n / 2 - 1; ++count_compare && i >= 0; i--)
-        heapify(a, n, i, count_compare);
+        heapifyWithCount_compare(a, n, i, count_compare);
     for (int i = n - 1; ++count_compare && i >= 0; i--) {
         int temp = a[0];
         a[0] = a[i];
         a[i] = temp;
-        heapify(a, i, 0, count_compare);
+        heapifyWithCount_compare(a, i, 0, count_compare);
     }
 }
 
