@@ -1,3 +1,122 @@
+void selectionSortWithCount_compare(int a[], int n, int & count_compare) {
+    for (int i = 0; ++count_compare && i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; ++count_compare && j < n; j++) {
+            if (++count_compare && a[j] < a[minIndex]) {
+                minIndex = j;
+            }
+        }
+        int temp = a[minIndex];
+        a[minIndex] = a[i];
+        a[i] = temp;
+    }
+}
+void insertionSortWithCount_compare(int a[], int n, int &count_compare) {
+    for (int i = 1; ++count_compare && i < n; i++) {
+        int key = a[i];
+        int j = i - 1;
+        while (++count_compare && j >= 0 && ++count_compare && a[j] > key) {
+            a[j + 1] = a[j];
+            j--;
+        }
+        a[j + 1] = key;
+    }
+}
+void bubbleSortWithCount_compare(int a[], int n, int &count_compare) {
+    for (int i = 0; ++count_compare && i < n - 1; i++) {
+        for (int j = 0; ++count_compare && j < n - i - 1; j++) {
+            if (++count_compare && a[j] > a[j + 1]) {
+                int temp = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = temp;
+            }
+        }
+    }
+}
+void shakerSortWithCount_compare(int a[], int n, int & count_compare) {
+    int low = 0, high = n - 1;
+    bool swapped = true;
+
+    while (++count_compare && swapped == true)
+    {
+        swapped = false;
+
+        for (int i = low; ++count_compare && i < high; i += 1)
+        {
+            if (++count_compare && a[i] > a[i + 1])
+            {
+                int temp = a[i];
+                a[i] = a[i + 1];
+                a[i + 1] = temp;
+                swapped = true;
+            }
+        }
+
+        if (++count_compare && swapped == false)
+            break;
+
+        swapped = false;
+        high -= 1;
+
+        for (int i = high; ++count_compare && i > low; i -= 1)
+        {
+            if (++count_compare && a[i] < a[i - 1])
+            {
+                int temp = a[i];
+                a[i] = a[i - 1];
+                a[i - 1] = temp;
+                swapped = true;
+            }
+        }
+
+        low += 1;
+    }
+}
+void shellSortWithCount_compare(int a[], int n, int &count_compare) {
+    for (int gap = n / 2; ++count_compare && gap > 0; gap /= 2)
+    {
+        for (int i = gap; ++count_compare && i < n; i += 1)
+        {
+            int temp = a[i];
+            int j = i;
+            while (++count_compare && j >= gap && ++count_compare && a[j - gap] > temp)
+            {
+                a[j] = a[j - gap];
+                j -= gap;
+            }
+            a[j] = temp;
+        }
+    }
+}
+void heapifyWithCount_compare(int a[], int n, int i, int & count_compare) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    if (++count_compare && left < n && ++count_compare && a[left] > a[largest])
+        largest = left;
+    if (++count_compare && right < n && ++count_compare && a[right] > a[largest])
+        largest = right;
+
+    if (++count_compare && largest != i) {
+        int temp = a[i];
+        a[i] = a[largest];
+        a[largest] = temp;
+        heapify(a, n, largest, count_compare);
+    }
+}
+
+void heapSortWithCount_compare(int a[], int n, int &count_compare) {
+
+    for (int i = n / 2 - 1; ++count_compare && i >= 0; i--)
+        heapify(a, n, i, count_compare);
+    for (int i = n - 1; ++count_compare && i >= 0; i--) {
+        int temp = a[0];
+        a[0] = a[i];
+        a[i] = temp;
+        heapify(a, i, 0, count_compare);
+    }
+}
+
 void mergeWithCount_compare(int a[], int low, int mid, int high,int &count_compare) {
     int leftSize = mid - low + 1;    
     int rightSize = high - mid;    
