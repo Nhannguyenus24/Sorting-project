@@ -38,8 +38,7 @@ void bubbleSort(int a[], int n) {
     }
 }
 
-void shakerSort(int a[], int n)
-{
+void shakerSort(int a[], int n) {
     int low = 0, high = n - 1;
     bool swapped = true;
 
@@ -79,8 +78,7 @@ void shakerSort(int a[], int n)
     }
 }
 
-void shellSort(int a[], int n)
-{
+void shellSort(int a[], int n) {
     for (int gap = n / 2; gap > 0; gap /= 2)
     {
         for (int i = gap; i < n; i += 1)
@@ -129,8 +127,8 @@ void heapSort(int a[], int n) {
 void merge(int a[], int low, int mid, int high) {
     int leftSize = mid - low + 1;    
     int rightSize = high - mid;    
-    int left[leftSize];
-    int right[rightSize];
+    int* left = new int[leftSize];
+    int*right = new int[rightSize];
     for (int i = 0; i < leftSize; i++)
         left[i] = a[low + i];
     for (int j = 0; j < rightSize; j++)
@@ -160,15 +158,21 @@ void merge(int a[], int low, int mid, int high) {
         j++;
         k++;
     }
+    delete[] left;
+    delete[] right;
 }
 
-void mergeSort(int a[], int low, int high) {
+void merge_sort(int a[], int low, int high) {
     if (low < high) {
         int mid = low + (high - low) / 2;
-        mergeSort(a, low, mid);
-        mergeSort(a, mid + 1, high);
+        merge_sort(a, low, mid);
+        merge_sort(a, mid + 1, high);
         merge(a, low, mid, high);
     }
+}
+
+void mergeSort(int a[], int n){
+    merge_sort(a, 0, n - 1);
 }
 
 int partition(int a[], int low, int high) {
@@ -188,12 +192,16 @@ int partition(int a[], int low, int high) {
     a[i - 1] = temp;
     return (i - 1);   
 }
-void quickSort(int a[], int low, int high) {
+void quick_sort(int a[], int low, int high) {
     if (low < high) {
         int pi = partition(a, low, high);
-        quickSort(a, low, pi - 1);
-        quickSort(a, pi + 1, high);
+        quick_sort(a, low, pi - 1);
+        quick_sort(a, pi + 1, high);
     }
+}
+
+void quickSort(int a[], int n){
+    quick_sort(a, 0, n - 1);
 }
 
 void countingSort(int a[], int n) {
@@ -203,14 +211,16 @@ void countingSort(int a[], int n) {
             maxElement = a[i];
         }
     }
-    int count[maxElement + 1] = { 0 };
+    int* count = new int[maxElement + 1];
+    for (int i = 0; i < maxElement + 1; i++)
+        count[i] = 0;
+    int* sortedArray = new int[n];
     for (int i = 0; i < n; i++) {
         count[a[i]]++;
     }
     for (int i = 1; i <= maxElement; i++) {
         count[i] += count[i - 1];
     }
-    int sortedArray[n];
     for (int i = n - 1; i >= 0; i--) {
         sortedArray[count[a[i]] - 1] = a[i];
         count[a[i]]--;
@@ -218,6 +228,8 @@ void countingSort(int a[], int n) {
     for (int i = 0; i < n; i++) {
         a[i] = sortedArray[i];
     }
+    delete[] count;
+    delete[] sortedArray;
 }
 
 void count(int a[], int n, int base) {
@@ -244,8 +256,7 @@ void radixSort(int a[], int n) {
         count(a, n, base);
 }
 
-void flashSort(int a[], int n)
-{
+void flashSort(int a[], int n) {
     int minValue = a[0];
     int maxIndex = 0;
     int lengthToConsider = int(0.45 * n);
