@@ -59,7 +59,7 @@ void Algorithm_mode(int argc, char* argv[]){
             if (output_order == 2 || output_order == 0){
                 sortf_ptr sort = sortfArray[sort_order];
                 double time = runningTime(arr, size, sort);
-                cout << "Running time: " << time << " ms" << endl;
+                cout << "Running time: " << time <<endl;
             }
             if (output_order == 1 || output_order == 2){
                 long long comparisions = 0;
@@ -72,8 +72,26 @@ void Algorithm_mode(int argc, char* argv[]){
         else if (checkExist(argv[2], sortnArray, 11, sort_order) && isNumber(argv[3]) && checkExist(argv[4],outputParameter, 3, output_order)){
             //Command 3
             size = atoi(argv[3]);
-            cout << "Features under development!" << endl; 
+            cout << "Algorithm: " << argv[2] << endl;
+            cout << "Input size: " << size << endl;
+            int* arr = new int[size];
+            for (int i = 0; i < 4; i++){
+                cout << endl << "Input order: " << dataType[i] << endl << "-------------------------" << endl;
+                GenerateData(arr, size, i);
+                if (output_order == 2 || output_order == 0){
+                sortf_ptr sort = sortfArray[sort_order];
+                double time = runningTime(arr, size, sort);
+                cout << "Running time: " << time <<endl;
+            }
+            if (output_order == 1 || output_order == 2){
+                long long comparisions = 0;
+                sortc_ptr sort_count_compare = sortcArray[sort_order];
+                sort_count_compare(arr, size, comparisions);
+                cout << "Comparisions: " << comparisions << endl;
+            }
 
+            }
+            delete[] arr;
         }
         else 
             cout <<"Input wrong command!"<<endl;
@@ -91,7 +109,7 @@ void Algorithm_mode(int argc, char* argv[]){
             if (output_order == 2 || output_order == 0){
                 sortf_ptr sort = sortfArray[sort_order];
                 double time = runningTime(arr, size, sort);
-                cout << "Running time: " << time << " ms" <<endl;
+                cout << "Running time: " << time <<endl;
             }
             if (output_order == 1 || output_order == 2){
                 long long comparisions = 0;
