@@ -59,7 +59,7 @@ void Algorithm_mode(int argc, char* argv[]){
             if (output_order == 2 || output_order == 0){
                 sortf_ptr sort = sortfArray[sort_order];
                 double time = runningTime(arr, size, sort);
-                cout << "Running time: " << time <<endl;
+                cout << "Running time: " << time << " ms" << endl;
             }
             if (output_order == 1 || output_order == 2){
                 long long comparisions = 0;
@@ -91,7 +91,7 @@ void Algorithm_mode(int argc, char* argv[]){
             if (output_order == 2 || output_order == 0){
                 sortf_ptr sort = sortfArray[sort_order];
                 double time = runningTime(arr, size, sort);
-                cout << "Running time: " << time <<endl;
+                cout << "Running time: " << time << " ms" <<endl;
             }
             if (output_order == 1 || output_order == 2){
                 long long comparisions = 0;
