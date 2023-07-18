@@ -4,12 +4,12 @@ void cloneArray(int source[], int des[], int size){
     for (int i = 0; i < size; i++)
         des[i] == source[i];
 }
-long long runningTime(int a[], int n, void (*ptr)(int[], int)) {
+double runningTime(int a[], int n, void (*ptr)(int[], int)) {
     auto start = chrono::high_resolution_clock::now();
     ptr(a, n);
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double, milli> elapsed = end - start;
-    return chrono::duration_cast<chrono::milliseconds>(elapsed).count();
+    return elapsed.count();
 }
 
 bool isNumber(char num[]){
@@ -28,27 +28,27 @@ bool checkExist(char name[], string array[], int len, int& order){
     return false;
 }
 
-void command(int argv, char* argc[]){
-	if (strcmp(argc[1], "-a") == 0){
+void command(int argc, char* argv[]){
+	if (strcmp(argv[1], "-a") == 0){
         cout <<"ALGORITHM MODE" << endl;
-		Algorithm_mode(argv, argc);
+		Algorithm_mode(argc, argv);
     }
-	else if (strcmp(argc[1], "-c") == 0){
+	else if (strcmp(argv[1], "-c") == 0){
         cout <<"COMPARISON MODE"  << endl;
-		Comparison_mode(argv, argc);
+		Comparison_mode(argc, argv);
     }
 	else
 		cout<<"Input wrong command!" << endl;
 }
-void Algorithm_mode(int argv, char* argc[]){
+void Algorithm_mode(int argc, char* argv[]){
     const char* file = ".txt";
     int input_order, output_order, sort_order, size;
-	if (argv == 5){
-        if (checkExist(argc[2], sortnArray, 11, sort_order) && (strstr(argc[3],file) != NULL) && checkExist(argc[4],outputParameter, 3, output_order)){
+	if (argc == 5){
+        if (checkExist(argv[2], sortnArray, 11, sort_order) && (strstr(argv[3],file) != NULL) && checkExist(argv[4],outputParameter, 3, output_order)){
             //Command 1
-            cout << "Algorithm: " << argc[2] << endl;
-            cout << "Input file: " << argc[3] << endl;
-            fstream in(argc[3]);
+            cout << "Algorithm: " << argv[2] << endl;
+            cout << "Input file: " << argv[3] << endl;
+            fstream in(argv[3]);
             in >> size;
             int* arr = new int[size];
             for (int i = 0; i < size; i++)
@@ -57,7 +57,8 @@ void Algorithm_mode(int argv, char* argc[]){
             cout << "Input size: " << size << endl;
             cout <<"-------------------------" << endl;
             if (output_order == 2 || output_order == 0){
-                long long time = runningTime(arr, size, sortfArray[sort_order]);
+                sortf_ptr sort = sortfArray[sort_order];
+                double time = runningTime(arr, size, sort);
                 cout << "Running time: " << time <<endl;
             }
             if (output_order == 1 || output_order == 2){
@@ -68,27 +69,28 @@ void Algorithm_mode(int argv, char* argc[]){
             }
             delete[] arr;
         }
-        else if (checkExist(argc[2], sortnArray, 11, sort_order) && isNumber(argc[3]) && checkExist(argc[4],outputParameter, 3, output_order)){
+        else if (checkExist(argv[2], sortnArray, 11, sort_order) && isNumber(argv[3]) && checkExist(argv[4],outputParameter, 3, output_order)){
             //Command 3
-            size = atoi(argc[3]);
+            size = atoi(argv[3]);
             cout << "Features under development!" << endl; 
 
         }
         else 
             cout <<"Input wrong command!"<<endl;
     }
-    else if (argv == 6){
-        if (checkExist(argc[2], sortnArray, 11, sort_order) && isNumber(argc[3]) && checkExist(argc[4], inputOrder, 4, input_order) && checkExist(argc[5],outputParameter, 3, output_order)){
+    else if (argc == 6){
+        if (checkExist(argv[2], sortnArray, 11, sort_order) && isNumber(argv[3]) && checkExist(argv[4], inputOrder, 4, input_order) && checkExist(argv[5],outputParameter, 3, output_order)){
             //Command 2
-            size = atoi(argc[3]);
-            cout << "Algorithm: " << argc[2] << endl;
+            size = atoi(argv[3]);
+            cout << "Algorithm: " << argv[2] << endl;
             cout <<"Input size: " << size << endl;
             cout <<"Input order: " << dataType[input_order] << endl;
             cout << "-------------------------" << endl;
             int* arr = new int[size];
             GenerateData(arr, size, input_order);
             if (output_order == 2 || output_order == 0){
-                long long time = runningTime(arr, size, sortfArray[sort_order]);
+                sortf_ptr sort = sortfArray[sort_order];
+                double time = runningTime(arr, size, sort);
                 cout << "Running time: " << time <<endl;
             }
             if (output_order == 1 || output_order == 2){
@@ -106,26 +108,28 @@ void Algorithm_mode(int argv, char* argc[]){
     else 
         cout <<"Input wrong command!"<<endl;
 }
-void Comparison_mode(int argv, char* argc[]){
+void Comparison_mode(int argc, char* argv[]){
 	const char* file = ".txt";
     int sort_order1, sort_order2, input_order, size;
-    if (argv == 5){
-        if (checkExist(argc[2], sortnArray, 11, sort_order1) && checkExist(argc[3], sortnArray, 11, sort_order2) && (strstr(argc[4],file) != NULL)){
+    if (argc == 5){
+        if (checkExist(argv[2], sortnArray, 11, sort_order1) && checkExist(argv[3], sortnArray, 11, sort_order2) && (strstr(argv[4],file) != NULL)){
             //Command 4
-            fstream in(argc[4]);
+            fstream in(argv[4]);
             in >> size;
             int* arr = new int[size];
             for (int i = 0; i < size; i++)
                 in >> arr[i];
             in.close();
-            cout <<"Algorithm: " << argc[2] << " | " << argc[3]<< endl;
-            cout << "Input file: " << argc[4] << endl;
+            cout <<"Algorithm: " << argv[2] << " | " << argv[3]<< endl;
+            cout << "Input file: " << argv[4] << endl;
             cout <<"------------------------"<<endl;
             int* arr2 = new int[size];
             cloneArray(arr, arr2, size);
-            long long time1 = runningTime(arr2, size, sortfArray[sort_order1]);
+            sortf_ptr sort1 = sortfArray[sort_order1];
+            sortf_ptr sort2 = sortfArray[sort_order2];
+            double time1 = runningTime(arr2, size, sort1);
             cloneArray(arr, arr2, size);
-            long long time2 = runningTime(arr2, size, sortfArray[sort_order2]);
+            double time2 = runningTime(arr2, size, sort2);
             cloneArray(arr, arr2, size);
             long long comparision1 = 0, comparision2 = 0;
             sortc_ptr sort_count_compare1 = sortcArray[sort_order1];
@@ -140,21 +144,23 @@ void Comparison_mode(int argv, char* argc[]){
         else 
             cout << "Input wrong command!" << endl;
     }
-    else if (argv == 6){
-        if (checkExist(argc[2], sortnArray, 11, sort_order1) && checkExist(argc[3], sortnArray, 11, sort_order2) && isNumber(argc[4]) && checkExist(argc[5], inputOrder, 4, input_order)){
+    else if (argc == 6){
+        if (checkExist(argv[2], sortnArray, 11, sort_order1) && checkExist(argv[3], sortnArray, 11, sort_order2) && isNumber(argv[4]) && checkExist(argv[5], inputOrder, 4, input_order)){
             //Command 5
-            size = atoi(argc[4]);
+            size = atoi(argv[4]);
             int* arr = new int[size];
             GenerateData(arr, size, input_order);
-            cout <<"Algorithm: " << argc[2] << " | " << argc[3]<< endl;
+            cout <<"Algorithm: " << argv[2] << " | " << argv[3]<< endl;
             cout << "Input size: " << size << endl;
             cout << "Input order: " << dataType[input_order] << endl;
             cout <<"------------------------"<<endl;
             int* arr2 = new int[size];
             cloneArray(arr, arr2, size);
-            long long time1 = runningTime(arr2, size, sortfArray[sort_order1]);
+            sortf_ptr sort1 = sortfArray[sort_order1];
+            sortf_ptr sort2 = sortfArray[sort_order2];
+            double time1 = runningTime(arr2, size, sort1);
             cloneArray(arr, arr2, size);
-            long long time2 = runningTime(arr2, size, sortfArray[sort_order2]);
+            double time2 = runningTime(arr2, size, sort2);
             cloneArray(arr, arr2, size);
             long long comparision1 = 0, comparision2 = 0;
             sortc_ptr sort_count_compare1 = sortcArray[sort_order1];
