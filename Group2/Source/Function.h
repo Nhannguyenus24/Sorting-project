@@ -18,10 +18,10 @@ string outputParameter[3] = {"-time", "-comp", "-both"};
 string dataType[4] = {"random data", "sorted data", "reverse data", "nearly sorted data"};
 
 void cloneArray(int source[], int des[], int size);
-long long runningTime(int a[], int n, void (*ptr)(int[], int));
+double runningTime(int a[], int n, void (*ptr)(int[], int));
 bool checkExist(char name[], string array[], int len, int& order);
 bool isNumber(char num[]);
-void command(int argv, char* argc[]);
-void Algorithm_mode(int argv, char* argc[]);
-void Comparison_mode(int argv, char* argc[]);
+void command(int argc, char* argv[]);
+void Algorithm_mode(int argc, char* argv[]);
+void Comparison_mode(int argc, char* argv[]);
 
