@@ -1,3 +1,4 @@
+#pragma once
 using namespace std;
 
 void selectionSort_c(int a[], int n, long long & count_compare);
