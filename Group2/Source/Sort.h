@@ -1,8 +1,5 @@
-#include <iostream>
-#include <algorithm>
 using namespace std;
 
-//Non-counting compares
 void selectionSort(int a[], int n);
 void insertionSort(int a[], int n);
 void bubbleSort(int a[], int n);
@@ -20,5 +17,3 @@ void countingSort(int a[], int n);
 void count(int a[], int n, int base);
 void radixSort(int a[], int n);
 void flashSort(int a[], int n);
-
-//Counting compares

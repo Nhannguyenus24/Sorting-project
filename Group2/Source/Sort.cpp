@@ -334,7 +334,3 @@ void flashSort(int a[], int n) {
         a[j + 1] = key;
     }
 }
-
-//==========================================
-//count_compare theo thu tu  Selection Sort, Insertion Sort, Bubble Sort, Shaker Sort, Shell Sort, Heap
-//Sort, Merge Sort, Quick Sort, Counting Sort, Radix Sort, and Flash Sort.
