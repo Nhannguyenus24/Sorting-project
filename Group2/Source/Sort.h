@@ -1,3 +1,4 @@
+#pragma once
 using namespace std;
 
 void selectionSort(int a[], int n);
