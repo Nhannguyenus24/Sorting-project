@@ -8,7 +8,7 @@ double runningTime(int a[], int n, void (*ptr)(int[], int)) {
     auto start = chrono::high_resolution_clock::now();
     ptr(a, n);
     auto end = chrono::high_resolution_clock::now();
-    chrono::duration<double, milli> elapsed = end - start;
+    chrono::duration<double, nano> elapsed = end - start;
     return elapsed.count();
 }
 
