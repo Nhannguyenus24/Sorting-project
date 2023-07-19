@@ -69,7 +69,7 @@ void Algorithm_mode(int argc, char* argv[]){
                 sort_count_compare(arr2, size, comparisions);
                 cout << "Comparisions: " << comparisions << endl;
             }
-            fstream out("output.txt");
+            ofstream out("output.txt");
             out << size << endl;
             for (int i = 0; i < size; i++)
                 out << arr[i] << " ";
@@ -87,7 +87,7 @@ void Algorithm_mode(int argc, char* argv[]){
             for (int i = 0; i < 4; i++){
                 cout << endl << "Input order: " << dataType[i] << endl << "-------------------------" << endl;
                 GenerateData(arr, size, i);
-                fstream in(generateFile[i]);
+                ofstream in(generateFile[i]);
                 in << size << endl;
                 for (int i = 0; i < size; i++)
                     in << arr[i] << " ";
@@ -123,7 +123,7 @@ void Algorithm_mode(int argc, char* argv[]){
             int* arr = new int[size];
             int* arr2 = new int[size];
             GenerateData(arr, size, input_order);
-            fstream in("input.txt");
+            ofstream in("input.txt");
             in << size << endl;
             for (int i = 0; i < size; i++)
                 in << arr[i] << " ";
@@ -140,7 +140,7 @@ void Algorithm_mode(int argc, char* argv[]){
                 sort_count_compare(arr2, size, comparisions);
                 cout << "Comparisions: " << comparisions << endl;
             }
-            fstream out("output.txt");
+            ofstream out("output.txt");
             out << size << endl;
             for (int i = 0; i < size; i++)
                 out << arr[i] << " ";
@@ -197,7 +197,7 @@ void Comparison_mode(int argc, char* argv[]){
             size = atoi(argv[4]);
             int* arr = new int[size];
             GenerateData(arr, size, input_order);
-            fstream in("input.txt");
+            ofstream in("input.txt");
             in << size << endl;
             for (int i = 0; i < size; i++)
                 in << arr[i] << " ";
