@@ -51,11 +51,13 @@ void Algorithm_mode(int argc, char* argv[]){
             fstream in(argv[3]);
             in >> size;
             int* arr = new int[size];
+            int* arr2 = new int[size];
             for (int i = 0; i < size; i++)
                 in >> arr[i];
             in.close();
             cout << "Input size: " << size << endl;
             cout <<"-------------------------" << endl;
+            cloneArray(arr, arr2, size);
             if (output_order == 2 || output_order == 0){
                 sortf_ptr sort = sortfArray[sort_order];
                 double time = runningTime(arr, size, sort);
@@ -64,10 +66,16 @@ void Algorithm_mode(int argc, char* argv[]){
             if (output_order == 1 || output_order == 2){
                 long long comparisions = 0;
                 sortc_ptr sort_count_compare = sortcArray[sort_order];
-                sort_count_compare(arr, size, comparisions);
+                sort_count_compare(arr2, size, comparisions);
                 cout << "Comparisions: " << comparisions << endl;
             }
+            fstream out("output.txt");
+            out << size << endl;
+            for (int i = 0; i < size; i++)
+                out << arr[i] << " ";
+            out.close();
             delete[] arr;
+            delete[] arr2;
         }
         else if (checkExist(argv[2], sortnArray, 11, sort_order) && isNumber(argv[3]) && checkExist(argv[4],outputParameter, 3, output_order)){
             //Command 3
@@ -75,23 +83,31 @@ void Algorithm_mode(int argc, char* argv[]){
             cout << "Algorithm: " << argv[2] << endl;
             cout << "Input size: " << size << endl;
             int* arr = new int[size];
+            int* arr2 = new int[size];
             for (int i = 0; i < 4; i++){
                 cout << endl << "Input order: " << dataType[i] << endl << "-------------------------" << endl;
                 GenerateData(arr, size, i);
+                fstream in(generateFile[i]);
+                in << size << endl;
+                for (int i = 0; i < size; i++)
+                    in << arr[i] << " ";
+                in.close();
+                cloneArray(arr, arr2, size);
                 if (output_order == 2 || output_order == 0){
-                sortf_ptr sort = sortfArray[sort_order];
-                double time = runningTime(arr, size, sort);
-                cout << "Running time: " << time <<endl;
+                    sortf_ptr sort = sortfArray[sort_order];
+                    double time = runningTime(arr2, size, sort);
+                    cout << "Running time: " << time <<endl;
+                    cloneArray(arr, arr2, size);
             }
-            if (output_order == 1 || output_order == 2){
-                long long comparisions = 0;
-                sortc_ptr sort_count_compare = sortcArray[sort_order];
-                sort_count_compare(arr, size, comparisions);
-                cout << "Comparisions: " << comparisions << endl;
+                if (output_order == 1 || output_order == 2){
+                    long long comparisions = 0;
+                    sortc_ptr sort_count_compare = sortcArray[sort_order];
+                    sort_count_compare(arr2, size, comparisions);
+                    cout << "Comparisions: " << comparisions << endl;
             }
-
             }
             delete[] arr;
+            delete[] arr2;
         }
         else 
             cout <<"Input wrong command!"<<endl;
@@ -105,7 +121,14 @@ void Algorithm_mode(int argc, char* argv[]){
             cout <<"Input order: " << dataType[input_order] << endl;
             cout << "-------------------------" << endl;
             int* arr = new int[size];
+            int* arr2 = new int[size];
             GenerateData(arr, size, input_order);
+            fstream in("input.txt");
+            in << size << endl;
+            for (int i = 0; i < size; i++)
+                in << arr[i] << " ";
+            in.close();
+            cloneArray(arr, arr2, size);
             if (output_order == 2 || output_order == 0){
                 sortf_ptr sort = sortfArray[sort_order];
                 double time = runningTime(arr, size, sort);
@@ -114,10 +137,16 @@ void Algorithm_mode(int argc, char* argv[]){
             if (output_order == 1 || output_order == 2){
                 long long comparisions = 0;
                 sortc_ptr sort_count_compare = sortcArray[sort_order];
-                sort_count_compare(arr, size, comparisions);
+                sort_count_compare(arr2, size, comparisions);
                 cout << "Comparisions: " << comparisions << endl;
             }
+            fstream out("output.txt");
+            out << size << endl;
+            for (int i = 0; i < size; i++)
+                out << arr[i] << " ";
+            out.close();
             delete[] arr;
+            delete[] arr2;
         }
         else {
             cout <<"Input wrong command!"<<endl;
@@ -168,6 +197,11 @@ void Comparison_mode(int argc, char* argv[]){
             size = atoi(argv[4]);
             int* arr = new int[size];
             GenerateData(arr, size, input_order);
+            fstream in("input.txt");
+            in << size << endl;
+            for (int i = 0; i < size; i++)
+                in << arr[i] << " ";
+            in.close();
             cout <<"Algorithm: " << argv[2] << " | " << argv[3]<< endl;
             cout << "Input size: " << size << endl;
             cout << "Input order: " << dataType[input_order] << endl;
