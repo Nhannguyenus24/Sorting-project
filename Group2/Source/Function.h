@@ -16,6 +16,7 @@ string sortnArray[11] = {"selection-sort", "insertion-sort", "bubble-sort", "sha
 string inputOrder[4] = {"-rand", "-sorted", "-rev", "-nsorted"};
 string outputParameter[3] = {"-time", "-comp", "-both"};
 string dataType[4] = {"random data", "sorted data", "reverse data", "nearly sorted data"};
+string generateFile[4] = { "input_1.txt", "input_3.txt", "input_4.txt", "input_2.txt" };
 
 void cloneArray(int source[], int des[], int size);
 double runningTime(int a[], int n, void (*ptr)(int[], int));
