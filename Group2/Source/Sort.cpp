@@ -209,13 +209,6 @@ void mergeSort(int a[], int n) {
 //    quick_sort(a, 0, n - 1);
 //}
 
-void Swap(int* a, int* b)
-{
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
-
 int partition(int arr[], int low, int high) {
     int x = arr[high];
     int i = (low - 1);
@@ -223,10 +216,14 @@ int partition(int arr[], int low, int high) {
     for (int j = low; j <= high - 1; j++) {
         if (arr[j] <= x) {
             i++;
-            Swap(&arr[i], &arr[j]);
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
     }
-    Swap(&arr[i + 1], &arr[high]);
+    int temp = arr[high];
+    arr[high] = arr[i + 1];
+    arr[i + 1] = temp;
     return (i + 1);
 }
 void quick_sort(int arr[], int low, int high) {

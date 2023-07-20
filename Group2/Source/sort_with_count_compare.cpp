@@ -208,13 +208,6 @@ void mergeSort_c(int a[], int n, long long& count_compare) {
 //    quick_sort_c(a, 0, n - 1, count_compare);
 //}
 
-void Swap(int* a, int* b)
-{
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
-
 int partition_c(int arr[], int low, int high, long long& count_compare) {
     int x = arr[high];
     int i = (low - 1);
@@ -222,10 +215,14 @@ int partition_c(int arr[], int low, int high, long long& count_compare) {
     for (int j = low; ++count_compare && j <= high - 1; j++) {
         if (++count_compare && arr[j] <= x) {
             i++;
-            Swap(&arr[i], &arr[j]);
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
     }
-    Swap(&arr[i + 1], &arr[high]);
+    int temp = arr[high];
+    arr[high] = arr[i + 1];
+    arr[i + 1] = temp;
     return (i + 1);
 }
 void quick_sort_c(int arr[], int low, int high, long long& count_compare) {
