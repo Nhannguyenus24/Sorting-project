@@ -180,33 +180,76 @@ void mergeSort(int a[], int n) {
     merge_sort(a, 0, n - 1);
 }
 
-int partition(int a[], int low, int high) {
-    int pivot = a[low];
-    int i = low + 1;
+//int partition(int a[], int low, int high) {
+//    int pivot = a[low];
+//    int i = low + 1;
+//
+//    for (int j = low + 1; j <= high; j++) {
+//        if (a[j] < pivot) {
+//            int temp = a[i];
+//            a[i] = a[j];
+//            a[j] = temp;
+//            i++;
+//        }
+//    }
+//    int temp = a[low];
+//    a[low] = a[i - 1];
+//    a[i - 1] = temp;
+//    return (i - 1);
+//}
+//void quick_sort(int a[], int low, int high) {
+//    if (low < high) {
+//        int pi = partition(a, low, high);
+//        quick_sort(a, low, pi - 1);
+//        quick_sort(a, pi + 1, high);
+//    }
+//}
+//
+//void quickSort(int a[], int n) {
+//    quick_sort(a, 0, n - 1);
+//}
 
-    for (int j = low + 1; j <= high; j++) {
-        if (a[j] < pivot) {
-            int temp = a[i];
-            a[i] = a[j];
-            a[j] = temp;
+void swap(int* a, int* b)
+{
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+
+int partition(int arr[], int low, int high) {
+    int x = arr[high];
+    int i = (low - 1);
+
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] <= x) {
             i++;
+            swap(&arr[i], &arr[j]);
         }
     }
-    int temp = a[low];
-    a[low] = a[i - 1];
-    a[i - 1] = temp;
-    return (i - 1);
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
 }
-void quick_sort(int a[], int low, int high) {
-    if (low < high) {
-        int pi = partition(a, low, high);
-        quick_sort(a, low, pi - 1);
-        quick_sort(a, pi + 1, high);
+void quick_sort(int arr[], int low, int high) {
+    int stack[high - low + 1];
+    int top = -1;
+    stack[++top] = low;
+    stack[++top] = high;
+    while (top >= 0) {
+        high = stack[top--];
+        low = stack[top--];
+        int p = partition(arr, low, high);
+        if (p - 1 > low) {
+            stack[++top] = low;
+            stack[++top] = p - 1;
+        }
+        if (p + 1 < high) {
+            stack[++top] = p + 1;
+            stack[++top] = high;
+        }
     }
 }
-
-void quickSort(int a[], int n) {
-    quick_sort(a, 0, n - 1);
+void quickSort(int arr[], int n) {
+    quick_sort(arr, 0, n - 1);
 }
 
 void countingSort(int a[], int n) {
