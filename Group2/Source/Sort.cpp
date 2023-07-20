@@ -27,14 +27,19 @@ void insertionSort(int a[], int n) {
 }
 
 void bubbleSort(int a[], int n) {
+    bool swapped;
     for (int i = 0; i < n - 1; i++) {
+        swapped = false;
         for (int j = 0; j < n - i - 1; j++) {
             if (a[j] > a[j + 1]) {
                 int temp = a[j];
                 a[j] = a[j + 1];
                 a[j + 1] = temp;
+                swapped = true;
             }
         }
+        if (!swapped)
+            break;
     }
 }
 
@@ -96,9 +101,9 @@ void shellSort(int a[], int n) {
 }
 
 void heapify(int a[], int n, int i) {
-    int largest = i;     
-    int left = 2 * i + 1;    
-    int right = 2 * i + 2;   
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
     if (left < n && a[left] > a[largest])
         largest = left;
     if (right < n && a[right] > a[largest])
@@ -113,8 +118,8 @@ void heapify(int a[], int n, int i) {
 }
 
 void heapSort(int a[], int n) {
-    
-    for (int i = n / 2 - 1; i >= 0; i--) 
+
+    for (int i = n / 2 - 1; i >= 0; i--)
         heapify(a, n, i);
     for (int i = n - 1; i >= 0; i--) {
         int temp = a[0];
@@ -125,18 +130,18 @@ void heapSort(int a[], int n) {
 }
 
 void merge(int a[], int low, int mid, int high) {
-    int leftSize = mid - low + 1;    
-    int rightSize = high - mid;    
+    int leftSize = mid - low + 1;
+    int rightSize = high - mid;
     int* left = new int[leftSize];
-    int*right = new int[rightSize];
+    int* right = new int[rightSize];
     for (int i = 0; i < leftSize; i++)
         left[i] = a[low + i];
     for (int j = 0; j < rightSize; j++)
         right[j] = a[mid + 1 + j];
 
-    int i = 0;  
-    int j = 0;  
-    int k = low;  
+    int i = 0;
+    int j = 0;
+    int k = low;
     while (i < leftSize && j < rightSize) {
         if (left[i] <= right[j]) {
             a[k] = left[i];
@@ -171,26 +176,26 @@ void merge_sort(int a[], int low, int high) {
     }
 }
 
-void mergeSort(int a[], int n){
+void mergeSort(int a[], int n) {
     merge_sort(a, 0, n - 1);
 }
 
 int partition(int a[], int low, int high) {
-    int pivot = a[low];    
-    int i = low + 1;  
+    int pivot = a[low];
+    int i = low + 1;
 
     for (int j = low + 1; j <= high; j++) {
         if (a[j] < pivot) {
             int temp = a[i];
             a[i] = a[j];
             a[j] = temp;
-            i++;   
+            i++;
         }
-    }  
+    }
     int temp = a[low];
     a[low] = a[i - 1];
     a[i - 1] = temp;
-    return (i - 1);   
+    return (i - 1);
 }
 void quick_sort(int a[], int low, int high) {
     if (low < high) {
@@ -200,7 +205,7 @@ void quick_sort(int a[], int low, int high) {
     }
 }
 
-void quickSort(int a[], int n){
+void quickSort(int a[], int n) {
     quick_sort(a, 0, n - 1);
 }
 
@@ -260,7 +265,7 @@ void flashSort(int a[], int n) {
     int minValue = a[0];
     int maxIndex = 0;
     int lengthToConsider = int(0.45 * n);
-    int *countArray = new int[lengthToConsider];
+    int* countArray = new int[lengthToConsider];
 
     for (int i = 0; i < lengthToConsider; i++)
         countArray[i] = 0;
