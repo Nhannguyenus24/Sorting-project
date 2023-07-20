@@ -178,37 +178,78 @@ void mergeSort_c(int a[], int n, long long& count_compare) {
 }
 
 
-int partition_c(int a[], int low, int high, long long& count_compare) {
-    int pivot = a[low];
-    int i = low + 1;
+//int partition_c(int a[], int low, int high, long long& count_compare) {
+//    int pivot = a[low];
+//    int i = low + 1;
+//
+//    for (int j = low + 1; ++count_compare && j <= high; j++)
+//    {
+//        if (++count_compare && a[j] < pivot)
+//        {
+//            int temp = a[i];
+//            a[i] = a[j];
+//            a[j] = temp;
+//            i++;
+//        }
+//    }
+//    int temp = a[low];
+//    a[low] = a[i - 1];
+//    a[i - 1] = temp;
+//    return (i - 1);
+//}
+//void quick_sort_c(int a[], int low, int high, long long& count_compare) {
+//    if (++count_compare && low < high) {
+//        int pi = partition_c(a, low, high, count_compare);
+//        quick_sort_c(a, low, pi - 1, count_compare);
+//        quick_sort_c(a, pi + 1, high, count_compare);
+//    }
+//}
+//void quickSort_c(int a[], int n, long long& count_compare) {
+//    quick_sort_c(a, 0, n - 1, count_compare);
+//}
 
-    for (int j = low + 1; ++count_compare && j <= high; j++)
-    {
-        if (++count_compare && a[j] < pivot)
-        {
-            int temp = a[i];
-            a[i] = a[j];
-            a[j] = temp;
+void swap(int* a, int* b)
+{
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+
+int partition_c(int arr[], int low, int high, long long& count_compare) {
+    int x = arr[high];
+    int i = (low - 1);
+
+    for (int j = low; ++count_compare && j <= high - 1; j++) {
+        if (++count_compare && arr[j] <= x) {
             i++;
+            swap(&arr[i], &arr[j]);
         }
     }
-    int temp = a[low];
-    a[low] = a[i - 1];
-    a[i - 1] = temp;
-    return (i - 1);
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
 }
-void quick_sort_c(int a[], int low, int high, long long& count_compare) {
-    if (++count_compare && low < high) {
-        int pi = partition_c(a, low, high, count_compare);
-        quick_sort_c(a, low, pi - 1, count_compare);
-        quick_sort_c(a, pi + 1, high, count_compare);
+void quick_sort_c(int arr[], int low, int high, long long& count_compare) {
+    int stack[high - low + 1];
+    int top = -1;
+    stack[++top] = low;
+    stack[++top] = high;
+    while (++count_compare && top >= 0) {
+        high = stack[top--];
+        low = stack[top--];
+        int p = partition_c(arr, low, high, count_compare);
+        if (++count_compare && p - 1 > low) {
+            stack[++top] = low;
+            stack[++top] = p - 1;
+        }
+        if (++count_compare && p + 1 < high) {
+            stack[++top] = p + 1;
+            stack[++top] = high;
+        }
     }
 }
-void quickSort_c(int a[], int n, long long& count_compare) {
-    quick_sort_c(a, 0, n - 1, count_compare);
+void quickSort_c(int arr[], int n, long long& count_compare) {
+    quick_sort_c(arr, 0, n - 1, count_compare);
 }
-
-
 
 
 void countingSort_c(int a[], int n, long long& count_compare) {
