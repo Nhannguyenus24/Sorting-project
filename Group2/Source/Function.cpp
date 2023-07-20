@@ -13,7 +13,7 @@ sortc_ptr sortcArray[11] = { selectionSort_c, insertionSort_c, bubbleSort_c, sha
 string sortnArray[11] = { "selection-sort", "insertion-sort", "bubble-sort", "shaker-sort", "shell-sort", "heap-sort", "merge-sort", "quick-sort", "counting-sort", "radix-sort", "flash-sort" };
 string inputOrder[4] = { "-rand", "-sorted", "-rev", "-nsorted" };
 string outputParameter[3] = { "-time", "-comp", "-both" };
-string dataType[4] = { "random data", "sorted data", "reverse data", "nearly sorted data" };
+string dataType[4] = { "Randomize", "Sorted", "Reversed", "Nearly Sorted" };
 string generateFile[4] = { "input_1.txt", "input_3.txt", "input_4.txt", "input_2.txt" };
 
 void cloneArray(int source[], int des[], int size) {
