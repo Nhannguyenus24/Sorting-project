@@ -14,16 +14,31 @@ void selectionSort(int a[], int n) {
     }
 }
 
-void insertionSort(int a[], int n) {
-    for (int i = 1; i < n; i++) {
-        int key = a[i];
-        int j = i - 1;
-        while (j >= 0 && a[j] > key) {
-            a[j + 1] = a[j];
-            j--;
-        }
-        a[j + 1] = key;
-    }
+// void insertionSort(int a[], int n) {
+//     for (int i = 1; i < n; i++) {
+//         int key = a[i];
+//         int j = i - 1;
+//         while (j >= 0 && a[j] > key) {
+//             a[j + 1] = a[j];
+//             j--;
+//         }
+//         a[j + 1] = key;
+//     }
+// }
+
+void insertionSort(int a[], int n) { // binary insertion sort
+	for(int i = 1; i < n;i++) {
+		int key = a[i];
+		int left = 0, right = i-1 ;
+		while(right >= left) {
+		  int m = (left + right) / 2;
+		  if( key < a[m] ) right = m - 1;
+		  else left = m + 1;
+		 }
+		 for( int j= i - 1;j >= left; j-- ) 
+			a[j+1]=a[j];
+		 a[left] = key;
+	}
 }
 
 void bubbleSort(int a[], int n) {

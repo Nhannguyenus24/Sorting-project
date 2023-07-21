@@ -37,9 +37,10 @@ bool isNumber(char num[]) {
 }
 bool checkExist(char name[], string array[], int len, int& order) {
     for (int i = 0; i < len; i++) {
-        order = i;
-        if (strcmp(name, array[i].c_str()) == 0)
+        if (strcmp(name, array[i].c_str()) == 0){
+            order = i;
             return true;
+        }
     }
     return false;
 }
@@ -117,12 +118,11 @@ void Algorithm_mode(int argc, char* argv[]) {
                     sortf_ptr sort = sortfArray[sort_order];
                     double time = runningTime(arr2, size, sort);
                     cout << "Running time: " << time << endl;
-                    cloneArray(arr, arr2, size);
                 }
                 if (output_order == 1 || output_order == 2) {
                     long long comparisions = 0;
                     sortc_ptr sort_count_compare = sortcArray[sort_order];
-                    sort_count_compare(arr2, size, comparisions);
+                    sort_count_compare(arr, size, comparisions);
                     cout << "Comparisions: " << comparisions << endl;
                 }
             }

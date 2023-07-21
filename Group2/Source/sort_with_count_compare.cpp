@@ -13,17 +13,33 @@ void selectionSort_c(int a[], int n, long long& count_compare) {
         a[i] = temp;
     }
 }
-void insertionSort_c(int a[], int n, long long& count_compare) {
-    for (int i = 1; ++count_compare && i < n; i++) {
-        int key = a[i];
-        int j = i - 1;
-        while (++count_compare && j >= 0 && ++count_compare && a[j] > key) {
-            a[j + 1] = a[j];
-            j--;
-        }
-        a[j + 1] = key;
-    }
+// void insertionSort_c(int a[], int n, long long& count_compare) {
+//     for (int i = 1; ++count_compare && i < n; i++) {
+//         int key = a[i];
+//         int j = i - 1;
+//         while (++count_compare && j >= 0 && ++count_compare && a[j] > key) {
+//             a[j + 1] = a[j];
+//             j--;
+//         }
+//         a[j + 1] = key;
+//     }
+// }
+
+void insertionSort_c(int a[], int n, long long& count_compare) { //binary insertion sort
+	for(int i = 1; ++count_compare && i < n;i++) {
+		int key = a[i];
+		int left = 0, right = i-1 ;
+		while( ++count_compare && right >= left) {
+		  int m = (left + right) / 2;
+		  if(++count_compare && key < a[m] ) right = m - 1;
+		  else left = m + 1;
+		 }
+		 for( int j= i - 1; ++count_compare && j >= left; j-- ) 
+			a[j+1]=a[j];
+		 a[left] = key;
+	}
 }
+
 void bubbleSort_c(int a[], int n, long long& count_compare) {
     bool swapped;
     for (int i = 0; ++count_compare && i < n - 1; i++) {
