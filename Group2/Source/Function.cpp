@@ -18,7 +18,7 @@ string generateFile[4] = { "input_1.txt", "input_3.txt", "input_4.txt", "input_2
 
 void cloneArray(int source[], int des[], int size) {
     for (int i = 0; i < size; i++)
-        des[i] == source[i];
+        des[i] = source[i];
 }
 double runningTime(int a[], int n, void (*ptr)(int[], int)) {
     auto start = chrono::high_resolution_clock::now();
