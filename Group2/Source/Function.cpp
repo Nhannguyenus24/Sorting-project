@@ -60,7 +60,9 @@ void Algorithm_mode(int argc, char* argv[]) {
     const char* file = ".txt";
     int input_order, output_order, sort_order, size;
     if (argc == 5) {
-        if (checkExist(argv[2], sortnArray, 11, sort_order) && (strstr(argv[3], file) != NULL) && checkExist(argv[4], outputParameter, 3, output_order)) {
+        if (checkExist(argv[2], sortnArray, 11, sort_order) 
+            && (strstr(argv[3], file) != NULL) 
+            && checkExist(argv[4], outputParameter, 3, output_order)) {
             //Command 1
             cout << "Algorithm: " << argv[2] << endl;
             cout << "Input file: " << argv[3] << endl;
@@ -93,7 +95,9 @@ void Algorithm_mode(int argc, char* argv[]) {
             delete[] arr;
             delete[] arr2;
         }
-        else if (checkExist(argv[2], sortnArray, 11, sort_order) && isNumber(argv[3]) && checkExist(argv[4], outputParameter, 3, output_order)) {
+        else if (checkExist(argv[2], sortnArray, 11, sort_order) 
+            && isNumber(argv[3]) 
+            && checkExist(argv[4], outputParameter, 3, output_order)) {
             //Command 3
             size = atoi(argv[3]);
             cout << "Algorithm: " << argv[2] << endl;
@@ -129,7 +133,10 @@ void Algorithm_mode(int argc, char* argv[]) {
             cout << "Input wrong command!" << endl;
     }
     else if (argc == 6) {
-        if (checkExist(argv[2], sortnArray, 11, sort_order) && isNumber(argv[3]) && checkExist(argv[4], inputOrder, 4, input_order) && checkExist(argv[5], outputParameter, 3, output_order)) {
+        if (checkExist(argv[2], sortnArray, 11, sort_order) 
+            && isNumber(argv[3]) 
+            && checkExist(argv[4], inputOrder, 4, input_order) 
+            && checkExist(argv[5], outputParameter, 3, output_order)) {
             //Command 2
             size = atoi(argv[3]);
             cout << "Algorithm: " << argv[2] << endl;
@@ -175,7 +182,9 @@ void Comparison_mode(int argc, char* argv[]) {
     const char* file = ".txt";
     int sort_order1, sort_order2, input_order, size;
     if (argc == 5) {
-        if (checkExist(argv[2], sortnArray, 11, sort_order1) && checkExist(argv[3], sortnArray, 11, sort_order2) && (strstr(argv[4], file) != NULL)) {
+        if (checkExist(argv[2], sortnArray, 11, sort_order1) 
+            && checkExist(argv[3], sortnArray, 11, sort_order2) 
+            && (strstr(argv[4], file) != NULL)) {
             //Command 4
             fstream in(argv[4]);
             in >> size;
@@ -208,7 +217,10 @@ void Comparison_mode(int argc, char* argv[]) {
             cout << "Input wrong command!" << endl;
     }
     else if (argc == 6) {
-        if (checkExist(argv[2], sortnArray, 11, sort_order1) && checkExist(argv[3], sortnArray, 11, sort_order2) && isNumber(argv[4]) && checkExist(argv[5], inputOrder, 4, input_order)) {
+        if (checkExist(argv[2], sortnArray, 11, sort_order1) 
+            && checkExist(argv[3], sortnArray, 11, sort_order2) 
+            && isNumber(argv[4]) 
+            && checkExist(argv[5], inputOrder, 4, input_order)) {
             //Command 5
             size = atoi(argv[4]);
             int* arr = new int[size];
